@@ -7,9 +7,37 @@ const res = document.getElementById("result");
 const toast = document.getElementById("toast");
 
 function calculate(value) {
-  // write your code here
-  console.log(value)
+  try {
+    // Evaluate mathematical expressions using the eval function
+    const result = eval(value);
+
+    // Check whether the result is a valid number
+    if (Number.isFinite(result)) {
+      // Display results on screen
+      res.value = result;
+    } else {
+      // If the result is invalid, displays an error message
+      res.value = "Error";
+    }
+  } catch (error) {
+    // Catch and display errors if they occur
+    res.value = "Error";
+    console.error("Error during calculation:", error);
+  }
 }
+
+// Function to clear the screen
+function clearScreen() {
+  res.value = "";
+}
+
+// Add event listener for "=" button
+document.getElementById("equals-button").addEventListener("click", function () {
+  calculate(res.value);
+});
+
+// Add event listener for "C" (clear) button
+document.getElementById("clear-button").addEventListener("click", clearScreen);
 
 // Swaps the stylesheet to achieve dark mode.
 function changeTheme() {
